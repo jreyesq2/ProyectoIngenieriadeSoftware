@@ -13,15 +13,7 @@ const allowedOrigins = new Set(
         .filter(Boolean)
 );
 
-const corsOptions = {
-    origin: function (origin, callback) {
-        // Allow requests with no origin (like mobile apps or curl)
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.has(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('CORS policy: Origin not allowed'));
-        }
+const corsOptions = { origin: '*' };
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
