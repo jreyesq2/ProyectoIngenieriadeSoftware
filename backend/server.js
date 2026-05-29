@@ -13,7 +13,13 @@ const allowedOrigins = new Set(
         .filter(Boolean)
 );
 
-const corsOptions = { origin: '*' };
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.has(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
