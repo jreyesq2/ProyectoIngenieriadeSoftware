@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Acceso Vehicular - UMG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sistema de Acceso Vehicular Universitario</h1>
+            <p>Módulo de Verificación de Marbetes Digitales (QR)</p>
+        </header>
+
+        <main class="card">
+            <h2>Simulador de Escáner QR / Consulta de Placa</h2>
+            <div class="search-box">
+                <input type="text" id="placaInput" placeholder="Ej: P123ABC" maxlength="7">
+                <button id="btnBuscar">Verificar Acceso</button>
+            </div>
+
+            <div id="resultado" class="result-box hidden"></div>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('btnBuscar').addEventListener('click', async () => {
+            const placa = document.getElementById('placaInput').value.trim();
+            const resultadoDiv = document.getElementById('resultado');
+
+            if (!placa) {
+                alert('Por favor, ingresa una placa vehicular.');
+                return;
+            }
+
+            try {
+                
+                const response = await fetch(`http://localhost:3000/api/marbetes/${placa}`);
+                const resData = await response.json();
+
+                resultadoDiv.classList.remove('hidden', 'success', 'error');
+
+                if (resData.success) {
+                    resultadoDiv.classList.add('success');
+                    resultadoDiv.innerHTML = `
+                        <h3>✅ ACCESO AUTORIZADO</h3>
+                        <p><strong>Placa:</strong> ${resData.data.placa}</p>
+                        <p><strong>Tipo:</strong> ${resData.data.tipo}</p>
+                        <p><strong>Estado del Marbete:</strong> <span class="badge active">${resData.data.estado}</span></p>
+                        <p><strong>Vence el:</strong> ${resData.data.fechaCaducidad}</p>
+                    `;
+                } else {
+                    resultadoDiv.classList.add('error');
+                    resultadoDiv.innerHTML = `
+                        <h3>❌ ACCESO DENEGADO</h3>
+                        <p>${resData.message}</p>
+                    `;
+                }
+            } catch (error) {
+                // Log the caught error for debugging and show a user-friendly message
+                console.error('Fetch error:', error);
+                resultadoDiv.classList.remove('hidden');
+                resultadoDiv.classList.add('error');
+                resultadoDiv.innerHTML = `<h3> Error de Conexión</h3><p>Asegúrate de que el backend esté encendido.</p>`;
+            }
+        });
+    </script>
+</body>
+</html>

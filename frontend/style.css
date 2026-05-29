@@ -1,0 +1,82 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+.container {
+    width: 100%;
+    max-width: 600px;
+}
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #1a365d;
+}
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+h2 {
+    color: #2d3748;
+    font-size: 1.3rem;
+    margin-top: 0;
+}
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+input:focus {
+    border-color: #3182ce;
+    outline: none;
+}
+button {
+    background-color: #2b6cb0;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+}
+button:hover {
+    background-color: #2b6cb0;
+}
+.result-box {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 5px solid;
+}
+.hidden { display: none; }
+.success {
+    background-color: #f0fff4;
+    border-color: #38a169;
+    color: #276749;
+}
+.error {
+    background-color: #fff5f5;
+    border-color: #e53e3e;
+    color: #9b2c2c;
+}
+.badge.active {
+    background: #38a169;
+    color: #07200f; /* darker text for sufficient contrast */
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
