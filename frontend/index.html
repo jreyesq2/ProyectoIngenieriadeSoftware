@@ -44,7 +44,7 @@
                 if (resData.success) {
                     resultadoDiv.classList.add('success');
                     resultadoDiv.innerHTML = `
-                        <h3>✅ ACCESO AUTORIZADO</h3>
+                        <h3> ACCESO AUTORIZADO</h3>
                         <p><strong>Placa:</strong> ${resData.data.placa}</p>
                         <p><strong>Tipo:</strong> ${resData.data.tipo}</p>
                         <p><strong>Estado del Marbete:</strong> <span class="badge active">${resData.data.estado}</span></p>
@@ -53,7 +53,7 @@
                 } else {
                     resultadoDiv.classList.add('error');
                     resultadoDiv.innerHTML = `
-                        <h3>❌ ACCESO DENEGADO</h3>
+                        <h3> ACCESO DENEGADO</h3>
                         <p>${resData.message}</p>
                     `;
                 }
